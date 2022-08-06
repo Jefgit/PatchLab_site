@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Cool Plugins</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="style.css">
+        <link href="css/slider.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/custom.css" rel="stylesheet" type="text/css">
+        <script src="assets/js/library/navimation.js"></script>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+        <script>
+           $(document).ready(function(){ 
+                $(".ss_white").hover(function(){
+                $(this).animate({'opacity':0},250);
+                }, function(){ 
+                $(this).animate({'opacity':1},250);
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="wrapper">
+            <ul class="parent">
+              <a href="#"><div id="logo"><img src="patch_lab.png" alt="Patch Lab"></div></a>
+              <li class="item">Products</li>
+              <li class="item">Services</li>
+              <li class="item">About</li>
+              <li class="item">Contacts</li>
+              <button class="button-24" role="button">LOGIN</button>
+            </ul>         
+       
+          <div class="card-carousel">
+              <div class="my-card"><img src="repair.png"></div>
+              <div class="my-card"><img src="printing.png"></div>
+              <div class="my-card"><img src="parts.png"></div>
+          </div>
+        </div> 
+        <footer>
+          <div id="links">
+            <a href="#"><div class="fb"><img class="ss" src="facebook.png" /></div></a>
+            <a href="#"><div class="insta"><img class="ss" src="instagram.png" /></div></a>
+            <a href="#"><div class="phone"><img class="ss" src="telephone.png" /></div></a>
+          </div>
+          </footer>  
+        <script>
+          $num = $('.my-card').length;
+          $even = $num / 2;
+          $odd = ($num + 1) / 2;
+           
+          if ($num % 2 == 0) {
+            $('.my-card:nth-child(' + $even + ')').addClass('active');
+            $('.my-card:nth-child(' + $even + ')').prev().addClass('prev');
+            $('.my-card:nth-child(' + $even + ')').next().addClass('next');
+          } else {
+            $('.my-card:nth-child(' + $odd + ')').addClass('active');
+            $('.my-card:nth-child(' + $odd + ')').prev().addClass('prev');
+            $('.my-card:nth-child(' + $odd + ')').next().addClass('next');
+          }
+           
+          $('.my-card').click(function() {
+            $slide = $('.active').width();
+            console.log($('.active').position().left);
+            
+            if ($(this).hasClass('next')) {
+              $('.card-carousel').stop(false, true).animate({left: '-=' + $slide});
+            } else if ($(this).hasClass('prev')) {
+              $('.card-carousel').stop(false, true).animate({left: '+=' + $slide});
+            }
+            
+            $(this).removeClass('prev next');
+            $(this).siblings().removeClass('prev active next');
+            
+            $(this).addClass('active');
+            $(this).prev().addClass('prev');
+            $(this).next().addClass('next');
+          });          
+          // Keyboard nav
+          $('html body').keydown(function(e) {
+            if (e.keyCode == 37) { // left
+              $('.active').prev().trigger('click');
+            }
+            else if (e.keyCode == 39) { // right
+              $('.active').next().trigger('click');
+            }
+          });
+          navimation({
+            parent: $("ul"),
+            item: $("li"),
+            event :"mouseenter" ,
+            navimationTag: {
+              background:"unset",
+              id:"navimation",
+              height:"2px",
+              timeTranslate:"0.5s",
+              timeFunctionTranslate:"ease-out",
+              timeHide:"0.5s",
+              timeFunctionHide:"linear",
+              css: {
+                "background-image":"linear-gradient(90deg, rgba(36,0,0,0) 0%, rgba(142,8,8,1) 30%, rgba(147,8,8,1) 70%, rgba(255,0,0,0) 100%)",
+              },
+              attr: {
+                "data-id":"1234",
+              },
+          },
+          });
+        </script>
+    </body>
+</html>
